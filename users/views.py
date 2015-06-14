@@ -58,7 +58,7 @@ class Login( View ):
         if form.is_valid():
             login( request, form.get_user() )
             
-            return redirect( request.POST.get( 'next', '/twit' ) )
+            return redirect( request.POST.get( 'next', '/blog' ) )
         else:
             request.context_dict[ 'form' ] = form
 

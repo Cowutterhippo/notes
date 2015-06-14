@@ -1,0 +1,26 @@
+{% extends base_template|default:"ui/base.html" %}
+
+{% block title %}Blog - {% endblock %}
+
+{% load partials%}
+{% block content %}
+<div class="panel panel-default">
+
+	<div class="panel-heading panel-title">
+		<span class="glyphicon glyphicon-bullhorn"></span>
+		Posts
+	</div>
+
+	<div class="panel-body">
+		{% list_posts %}
+	</div>
+	<div class="panel-footer">
+		&nbsp;
+		<a href="/blog/create" class="ajax pull-right">
+			<span class="glyphicon glyphicon-pencil"></span>
+			Add blog post
+		</a>
+	</div>
+
+</div>
+{% endblock %}

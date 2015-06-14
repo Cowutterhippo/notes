@@ -1,0 +1,14 @@
+{%for post in posts%}
+	<a href="/blog/post/{{ post.slug }}" class="ajax btn btn-defua" > 
+		<h3>
+			{{ post.title }}
+			<small>
+				By {{ post.user_id.username }}
+			</small>
+		</h3>
+	</a>
+{% empty %}
+	<p>
+		You do not seem to have any posts.
+	</p>
+{%endfor%}

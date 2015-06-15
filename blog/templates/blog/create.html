@@ -1,6 +1,6 @@
 {% extends base_template %}
 
-{% block title %}Profile - {% endblock %}
+{% block title %}New - {% endblock %}
 
 {% block content %}
 	{%  load bootstrap %}
@@ -17,12 +17,33 @@
 
 		{% boot_form_fields form %}
 
-		<button class="btn btn-default">
+		<button class="btn btn-default" type="submit">
 			<span class="glyphicon glyphicon-share-alt"></span>
 			Save
 		</button>
-		</form>
-	</div>
+		<button class="btn btn-default" type="preview">
+			Preview
+		</button>
 
+		<div id="preview">
+		</div>
+		</form>
+
+	</div>
 </div>
+<script>
+marked.setOptions({
+	highlight: function( text, language ) {
+		return hljs.highlight( language.toLowerCase(), text, true ).value;
+	}
+});
+
+$( '[type="preview"]' ).on( 'click', function( event ){
+	event.preventDefault()
+	$( '#preview' ).html( marked( $( '[name="content"]').val() ) );
+	// stop form from processing
+	return false;
+} );
+</script>
+
 {% endblock %}

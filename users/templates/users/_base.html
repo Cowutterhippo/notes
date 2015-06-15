@@ -13,6 +13,7 @@
 
 	
 	<link media="all" type="text/css" rel="stylesheet" href="{% static "css/styles.css" %}">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
 	
 	<!-- Scripts are placed here -->
 	
@@ -23,7 +24,9 @@
 	<script src="{% static "js/django_ajax.js" %}" defer></script>
 	<script src="{% static "js/spa.js" %}" defer></script>
 	<script src="{% static "js/mustache.min.js" %}" defer></script>
-	<!-- <script src="{% static "js/repeat.js" %}" defer></script> -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+	<script src="{% static "js/marked.js" %}" ></script>
+
 </head>
 <body>
 	<div class="container">
@@ -36,8 +39,8 @@
 			<nav class="navbar navbar-default">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="/twit" class="btn">
-							<i class="fa fa-twitter"></i>
+						<a href="/blog" class="btn">
+							<i class="glyphicon glyphicon-bullhorn"></i>
 							Blog
 						</a>
 					</li>

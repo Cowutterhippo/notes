@@ -11,8 +11,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bitrest',
-    'bitmess',
+    'users',
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -24,12 +24,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'users.middleware.ajax',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
-ROOT_URLCONF = 'bitR.urls'
+ROOT_URLCONF = 'notes.urls'
 
-WSGI_APPLICATION = 'bitR.wsgi.application'
+WSGI_APPLICATION = 'notes.wsgi.application'
 
 
 # Internationalization

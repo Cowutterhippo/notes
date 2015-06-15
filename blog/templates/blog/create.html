@@ -34,14 +34,17 @@
 <script>
 marked.setOptions({
 	highlight: function( text, language ) {
-		return hljs.highlight( language.toLowerCase(), text, true ).value;
+		try{
+			return hljs.highlight( language.toLowerCase(), text, true ).value;
+		}catch( error ){
+			return text
+		}
 	}
 });
 
 $( '[type="preview"]' ).on( 'click', function( event ){
 	event.preventDefault()
 	$( '#preview' ).html( marked( $( '[name="content"]').val() ) );
-	// stop form from processing
 	return false;
 } );
 </script>

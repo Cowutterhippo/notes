@@ -16,6 +16,7 @@ class Post( models.Model ):
 	created_at = models.DateField( auto_now_add=True )
 	updated_at = models.DateField( auto_now=True )
 	user_id = models.ForeignKey( User )
+	is_public = models.BooleanField( default=True )
 
 class Comment( models.Model ):
 	content = models.TextField()

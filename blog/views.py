@@ -15,7 +15,7 @@ class IndexView(View):
 class Create(View):
     template = 'blog/create.html'
 
-    def get(self,request):
+    def get(self, request):
         if request.user.is_anonymous():
             return redirect( '/' )
 
@@ -23,7 +23,7 @@ class Create(View):
 
         return render( request, self.template, request.context_dict )
     
-    def post(self,request):
+    def post(self, request):
         form = PostForm( request.POST )
 
         if form.is_valid():
@@ -37,6 +37,36 @@ class Create(View):
         request.context_dict['form'] = form
 
         return render( request, self.template, request.context_dict )
+
+class Edit(View):
+    template = 'blog/create.html'
+
+    def get( self, request, id ):
+        if request.user.is_anonymous():
+            return redirect( '/' )
+
+        request.context_dict['form'] = PostForm( instance=Post.objects.get( id=id ) )
+
+        return render( request, self.template, request.context_dict )
+
+    def post( self, request, id ):
+        post = Post.objects.get( id=id )
+        form = PostForm( request.POST, instance=post )
+
+        if form.is_valid():
+            form.save()
+            # data = form.cleaned_data
+            # data['user_id'] = User.objects.get( id=request.user.id )
+            # data['slug'] = slugify( request.POST['title'] )
+            # data = post.update( **data )
+
+            return redirect( '/blog/post/{}'.format( slugify( form.cleaned_data['title'] ) ) )
+
+        request.context_dict['form'] = form
+
+        return render( request, self.template, request.context_dict )
+        
+
 
 class BlogDisplayView(View):
     template = 'blog/display.html'

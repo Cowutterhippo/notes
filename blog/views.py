@@ -55,10 +55,6 @@ class Edit(View):
 
         if form.is_valid():
             form.save()
-            # data = form.cleaned_data
-            # data['user_id'] = User.objects.get( id=request.user.id )
-            # data['slug'] = slugify( request.POST['title'] )
-            # data = post.update( **data )
 
             return redirect( '/blog/post/{}'.format( slugify( form.cleaned_data['title'] ) ) )
 
@@ -66,7 +62,6 @@ class Edit(View):
 
         return render( request, self.template, request.context_dict )
         
-
 
 class BlogDisplayView(View):
     template = 'blog/display.html'

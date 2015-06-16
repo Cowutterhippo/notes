@@ -16,3 +16,15 @@ class Post( models.Model ):
 	created_at = models.DateField( auto_now_add=True )
 	updated_at = models.DateField( auto_now=True )
 	user_id = models.ForeignKey( User )
+
+class Comment( models.Model ):
+	content = models.TextField()
+	created_at = models.DateField( auto_now_add=True )
+	updated_at = models.DateField( auto_now=True )
+	post_id = models.ForeignKey( Post )
+	user_id = models.ForeignKey( User )
+
+class Like( models.Model ):
+	user_id = models.ForeignKey( User )
+	post_id = models.ForeignKey( Post )
+	created_at = models.DateField( auto_now_add=True )

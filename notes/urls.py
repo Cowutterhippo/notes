@@ -7,4 +7,3 @@ urlpatterns = patterns('',
     url(r'^users/', include('users.urls')),
 	url( r'^blog/', include( 'blog.urls', namespace='blog' ) ),
 )
-

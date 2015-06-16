@@ -9,11 +9,9 @@
 
 		<h2>{{ post.title}} - <i>{{ post.category }}</i></h2>
 
-		<blockquote>
-			<p>
-				{{ post.content }}
-			</p>
-		</blockquote>
+			<!-- There must be no extra spaces or line breaks in #displayPost for MD to be parsed correctly -->
+			<p id="displayPost">{{ post.content }}</p>
+		
 	</div>
 
 	<div class="panel-footer">
@@ -29,4 +27,20 @@
 	</div>
 
 </div>
+<script>
+$( document ).ready( function(){
+	marked.setOptions({
+		highlight: function( text, language ) {
+			try{
+				return hljs.highlight( language.toLowerCase(), text, true ).value;
+			}catch( error ){
+				return text
+			}
+		}
+	});
+	console.log(marked( $( '#displayPost' ).html() ))
+	$( '#displayPost' ).html( marked( $( '#displayPost' ).html() ) ); 
+
+} );
+</script>
 {% endblock %}

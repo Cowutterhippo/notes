@@ -4,6 +4,7 @@ from blog.models import Post
 from blog.forms import PostForm
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.http import JsonResponse
 
 class IndexView(View):
     template = 'blog/index.html'
@@ -63,6 +64,7 @@ class Edit(View):
         return render( request, self.template, request.context_dict )
         
 
+
 class BlogDisplayView(View):
     template = 'blog/display.html'
     
@@ -70,3 +72,13 @@ class BlogDisplayView(View):
         request.context_dict['post'] = Post.objects.get( slug=slug )
 
         return render( request, self.template, request.context_dict )
+
+class APIget(View):
+    def post( self, request ):
+        import pprint
+        pprint.pprint( request.json )
+        JsonResponse( request.json )
+
+    def get( self, request ):
+        import pprint
+        pprint.pprint( request.json )

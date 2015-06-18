@@ -75,10 +75,16 @@ class BlogDisplayView(View):
 
 class APIget(View):
     def post( self, request ):
-        import pprint
-        pprint.pprint( request.json )
-        JsonResponse( request.json )
+        return JsonResponse( request.json )
 
     def get( self, request ):
-        import pprint
-        pprint.pprint( request.json )
+        return JsonResponse( request.json )
+
+    def put( self, request ):
+        return JsonResponse( request.json )
+
+    def delete( self, request ):
+        return JsonResponse( request.json )
+
+    def mynuts( self, request ):
+        return JsonResponse( request.json )

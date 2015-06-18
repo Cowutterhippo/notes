@@ -46,7 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'users.middleware.ajax',
-    'notes.middleware.json',
+    'notes.middleware.JSON',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 

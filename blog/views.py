@@ -5,18 +5,21 @@ from blog.forms import PostForm
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.http import JsonResponse
+import mistune
 
-class IndexView(View):
+md = mistune.Markdown()
+
+class IndexView( View ):
     template = 'blog/index.html'
 
     def get( self, request ):
 
         return render( request, self.template , request.context_dict )
 
-class Create(View):
+class Create( View ):
     template = 'blog/create.html'
 
-    def get(self, request):
+    def get( self, request ):
         if request.user.is_anonymous():
             return redirect( '/' )
 
@@ -24,13 +27,12 @@ class Create(View):
 
         return render( request, self.template, request.context_dict )
     
-    def post(self, request):
+    def post( self, request ):
         form = PostForm( request.POST )
 
         if form.is_valid():
             data = form.cleaned_data
             data['user_id'] = User.objects.get( id=request.user.id )
-            data['slug'] = slugify( request.POST['title'] )
             data = Post.objects.create( **data )
 
             return redirect( 'post/{}'.format( data.slug ) )
@@ -39,7 +41,7 @@ class Create(View):
 
         return render( request, self.template, request.context_dict )
 
-class Edit(View):
+class Edit( View ):
     template = 'blog/create.html'
 
     def get( self, request, id ):
@@ -55,9 +57,9 @@ class Edit(View):
         form = PostForm( request.POST, instance=post )
 
         if form.is_valid():
-            form.save()
+            post = form.save()
 
-            return redirect( '/blog/post/{}'.format( slugify( form.cleaned_data['title'] ) ) )
+            return redirect( '/blog/post/{}'.format( post.slug ) )
 
         request.context_dict['form'] = form
 
@@ -65,26 +67,26 @@ class Edit(View):
         
 
 
-class BlogDisplayView(View):
+class BlogDisplayView( View ):
     template = 'blog/display.html'
     
     def get( self, request, slug ):
-        request.context_dict['post'] = Post.objects.get( slug=slug )
 
+        request.context_dict['post'] = Post.objects.get( slug=slug )
+        request.context_dict['content'] = md( request.context_dict['post'].content )
+        print( request.context_dict['content'] )
         return render( request, self.template, request.context_dict )
 
-class APIget(View):
-    def post( self, request ):
-        return JsonResponse( request.json )
-
+class APIget( View ):
     def get( self, request ):
+        p = Post.objects.all()
+        return JsonResponse( p[0].as_json() )
+
+    def post( self, request ):
         return JsonResponse( request.json )
 
     def put( self, request ):
         return JsonResponse( request.json )
 
     def delete( self, request ):
-        return JsonResponse( request.json )
-
-    def mynuts( self, request ):
         return JsonResponse( request.json )

@@ -10,7 +10,7 @@
 		<h2>{{ post.title}} - <i>{{ post.category }}</i></h2>
 
 			<!-- There must be no extra spaces or line breaks in #displayPost for MD to be parsed correctly -->
-			<code id="displayPost">{{ post.content }}</code>
+			{% autoescape off %}{{ content }}{% endautoescape %}
 		
 	</div>
 

@@ -26,7 +26,8 @@
 								cursor:'auto'
 							} );
 						},
-						crossDomain: false
+						crossDomain: false,
+						cache: false
 					});
 				});
 			},
@@ -46,7 +47,6 @@
 	} );
 
 	if ( 'pushState' in history ){
-		console.log('ran')
 		// Convert links
 
 		$( window ).on( "popstate", function( event ) {

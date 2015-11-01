@@ -23,5 +23,5 @@ class JSON( object ):
     
     def process_request( self, request ):
 
-        if( 'json' in request.META.get('CONTENT_TYPE') ):
+        if( 'json' in request.META.get('CONTENT_TYPE', '') ):
             request.json = json.loads( parseDataByMethod( request ) )
